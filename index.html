@@ -912,7 +912,93 @@
                     #mc_embed_signup .button:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(212,175,55,0.5); }
                     #mc_embed_signup .refferal_badge { display: none !important; }
                     #mc_embed_signup p { display: none !important; }
+                    
+                    /* Thank You Overlay Styles */
+                    #thank-you-overlay {
+                        display: none;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.8);
+                        z-index: 9999;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    
+                    .thank-you-content {
+                        background: white;
+                        border-radius: 20px;
+                        padding: 3rem;
+                        max-width: 600px;
+                        width: 90%;
+                        text-align: center;
+                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                        animation: slideIn 0.5s ease;
+                    }
+                    
+                    @keyframes slideIn {
+                        from {
+                            transform: translateY(-50px);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    }
+                    
+                    .thank-you-content h3 {
+                        color: var(--deep-blue);
+                        font-size: 2.5rem;
+                        margin-bottom: 1rem;
+                    }
+                    
+                    .thank-you-content i.checkmark {
+                        font-size: 4rem;
+                        color: var(--accent-teal);
+                        margin-bottom: 1rem;
+                    }
+                    
+                    .close-thank-you {
+                        background: var(--primary-gold);
+                        color: var(--deep-blue);
+                        padding: 1rem 2rem;
+                        border: none;
+                        border-radius: 50px;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        cursor: pointer;
+                        margin-top: 2rem;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .close-thank-you:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 6px 25px rgba(212,175,55,0.5);
+                    }
                 </style>
+                
+                <!-- Thank You Overlay -->
+                <div id="thank-you-overlay">
+                    <div class="thank-you-content">
+                        <i class="fas fa-check-circle checkmark"></i>
+                        <h3>Thank You for Subscribing!</h3>
+                        <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 1rem;">
+                            We've sent you an email with your access code and download links for all three books.
+                        </p>
+                        <p style="color: var(--text-dark);">
+                            Please check your inbox (and spam folder, just in case).
+                        </p>
+                        <p style="font-weight: bold; color: var(--primary-gold); margin-top: 1.5rem;">
+                            Your books should arrive within 5 minutes!
+                        </p>
+                        <button class="close-thank-you" onclick="closeThankYou()">
+                            Continue Reading
+                        </button>
+                    </div>
+                </div>
                 
                 <div id="mc_embed_shell">
                 <div id="mc_embed_signup">
@@ -1427,6 +1513,33 @@
                 this.reset();
             });
         }
+        // Handle Mailchimp form submission
+        document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
+            // Let the form submit normally to Mailchimp
+            // Show thank you overlay after a short delay
+            setTimeout(function() {
+                showThankYou();
+            }, 1000);
+        });
+        
+        // Show thank you overlay
+        function showThankYou() {
+            document.getElementById('thank-you-overlay').style.display = 'flex';
+            // Reset form
+            document.getElementById('mc-embedded-subscribe-form').reset();
+        }
+        
+        // Close thank you overlay
+        function closeThankYou() {
+            document.getElementById('thank-you-overlay').style.display = 'none';
+        }
+        
+        // Close overlay when clicking outside
+        document.getElementById('thank-you-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeThankYou();
+            }
+        });
     </script>
 </body>
 </html>
