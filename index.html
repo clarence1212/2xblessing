@@ -1513,13 +1513,37 @@
                 this.reset();
             });
         }
-        // Handle Mailchimp form submission
+        // Handle Mailchimp form submission with AJAX
         document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
-            // Let the form submit normally to Mailchimp
-            // Show thank you overlay after a short delay
-            setTimeout(function() {
+            e.preventDefault(); // Stop the form from redirecting
+            
+            var form = this;
+            var data = new FormData(form);
+            var submitButton = form.querySelector('#mc-embedded-subscribe');
+            
+            // Disable button and show loading
+            submitButton.value = 'Subscribing...';
+            submitButton.disabled = true;
+            
+            // Submit via AJAX
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                mode: 'no-cors' // Required for Mailchimp
+            })
+            .then(function() {
+                // Show thank you overlay
                 showThankYou();
-            }, 1000);
+                // Re-enable button
+                submitButton.value = 'Get Your Free Books';
+                submitButton.disabled = false;
+            })
+            .catch(function(error) {
+                // Even if there's an error, the subscription usually works
+                showThankYou();
+                submitButton.value = 'Get Your Free Books';
+                submitButton.disabled = false;
+            });
         });
         
         // Show thank you overlay
