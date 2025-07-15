@@ -1,1 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blessing Upon Blessing - A Journey from Chronos to Kairos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-gold: #d4af37;
+            --deep-blue: #1a2b4c;
+            --royal-purple: #4a1a4a;
+            --warm-white: #fefefe;
+            --soft-gold: #f4e8c1;
+            --text-dark: #2c3e50;
+            --accent-teal: #16a085;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 43, 76, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 43, 76, 1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--warm-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--warm-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--royal-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--warm-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:rgba(212,175,55,0.1)"/><stop offset="100%" style="stop-color:rgba(212,175,55,0)"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23g)"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="40" r="1.5" fill="url(%23g)"><animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" begin="1s"/></circle><circle cx="40" cy="80" r="1" fill="url(%23g)"><animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite" begin="2s"/></circle></svg>') center/cover;
+            animation: floating 20s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-book-display {
+            perspective: 1000px;
+        }
+
+        .hero-book-display img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            transform: rotateY(-5deg);
+        }
+
+        .hero-book-display img:hover {
+            transform: rotateY(0deg) scale(1.05);
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-gold), var(--soft-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 5px rgba(212,175,55,0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(212,175,55,0.6)); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 100;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-gold), #f4d03f);
+            color: var(--deep-blue);
+            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212,175,55,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--deep-blue);
+            border: 2px solid var(--primary-gold);
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--deep-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Hero section specific button styling */
+        .hero .btn-secondary {
+            color: var(--warm-white);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .hero .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--deep-blue);
+        }
+
+        /* Books Section */
+        .books-section {
+            padding: 5rem 0;
+            background: var(--warm-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--deep-blue);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: visible;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary-gold);
+        }
+
+        .book-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .book-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .book-status {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .status-complete {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        .book-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .book-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .book-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .book-features i {
+            color: var(--primary-gold);
+        }
+
+        /* Book Preview Section */
+        .book-preview {
+            margin-bottom: 4rem;
+        }
+
+        /* Daily Devotional Section */
+        .devotional-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--soft-gold) 0%, var(--warm-white) 100%);
+        }
+
+        .devotional-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        .devotional-day {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .day-number {
+            background: var(--deep-blue);
+            color: var(--primary-gold);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .day-theme {
+            font-size: 1.5rem;
+            color: var(--deep-blue);
+            font-weight: bold;
+        }
+
+        .verse {
+            background: var(--soft-gold);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--primary-gold);
+            font-style: italic;
+        }
+
+        /* Author Section */
+        .author-section {
+            padding: 5rem 0;
+            background: var(--deep-blue);
+            color: var(--warm-white);
+        }
+
+        .author-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--deep-blue);
+            margin: 0 auto;
+        }
+
+        .author-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 5rem 0;
+            background: var(--warm-white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-gold);
+            background: linear-gradient(135deg, var(--soft-gold) 0%, white 100%);
+            transform: scale(1.05);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--deep-blue);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-blue);
+            color: var(--warm-white);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--warm-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: var(--warm-white);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--deep-blue), var(--royal-purple));
+            color: var(--warm-white);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--primary-gold);
+        }
+
+        .close {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            color: var(--warm-white);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--primary-gold);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: calc(80vh - 200px);
+            overflow-y: auto;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .modal-body h1 {
+            color: var(--deep-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body h2 {
+            color: var(--deep-blue);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .modal-body h3 {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body em {
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        .modal-body strong {
+            color: var(--deep-blue);
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            background: var(--soft-gold);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-top: 2px solid var(--primary-gold);
+        }
+
+        .modal-footer p {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.4rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .author-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Blessing Upon Blessing</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#preview">Preview</a></li>
+                <li><a href="#early-access">Early Access</a></li>
+                <li><a href="#author">Author</a></li>
+                <li><a href="#pricing">Get Started</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-book-display">
+                <img src="https://raw.githubusercontent.com/clarence1212/images/main/cover.png" 
+                     alt="Blessing Upon Blessing Book Cover"
+                     onload="console.log('Hero book cover loaded')"
+                     onerror="console.log('Hero book cover failed to load')">
+            </div>
+            <div class="hero-text">
+                <h1>Blessing Upon Blessing</h1>
+                <div class="subtitle">A Journey from Chronos to Kairos</div>
+                <p class="description">
+                    Experience the transformative power of divine timing through a remarkable memoir of faith, 
+                    accompanied by powerful prayer guidelines and daily devotions that will revolutionize your spiritual journey.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#books" class="btn btn-primary">
+                        <i class="fas fa-book"></i>
+                        Explore the Books
+                    </a>
+                    <a href="#early-access" class="btn btn-secondary">
+                        <i class="fas fa-gift"></i>
+                        Get Early Access
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section id="books" class="books-section">
+        <div class="container">
+            <h2 class="section-title fade-in">The Complete Series</h2>
+            <div class="books-grid">
+                
+                <!-- Book 1: Memoir -->
+                <div class="book-card fade-in">
+                    <div class="book-number">01</div>
+                    <h3 class="book-title">The Memoir</h3>
+                    <div class="book-status status-complete">✅ Complete</div>
+                    
+                    <!-- Book Cover Image -->
+                    <div style="text-align: center; margin: 1.5rem 0; border: 2px dashed #d4af37; padding: 1rem; min-height: 400px;">
+                        <img src="https://raw.githubusercontent.com/clarence1212/images/main/cover.png" 
+                             alt="Blessing Upon Blessing Book Cover" 
+                             style="width: 100%; max-width: 250px; height: auto; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: all 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'"
+                             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.2)'"
+                             onload="console.log('Memoir cover loaded successfully')"
+                             onerror="console.log('Memoir cover failed to load'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; width: 100%; max-width: 250px; height: 375px; background: linear-gradient(135deg, #1a2b4c, #4a6caf); border-radius: 10px; margin: 0 auto; flex-direction: column; align-items: center; justify-content: center; color: #d4af37; font-size: 1rem; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                            <div style="font-size: 1.5rem; margin-bottom: 1rem;">⛰️</div>
+                            <div style="font-weight: bold; margin-bottom: 0.5rem;">The Memoir</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Cover Image</div>
+                            <div style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.6;">Mountain with<br>divine light</div>
+                        </div>
+                    </div>
+                    
+                    <p class="book-description">
+                        A powerful journey from ancestral altars to prophetic calling, chronicling 
+                        divine encounters that transformed tragedy into triumph.
+                    </p>
+                    <ul class="book-features">
+                        <li><i class="fas fa-star"></i> 13 Life-Changing Chapters</li>
+                        <li><i class="fas fa-heart"></i> Real Testimonies of Faith</li>
+                        <li><i class="fas fa-mountain"></i> Mountain Encounter Revelations</li>
+                        <li><i class="fas fa-crown"></i> Divine Identity Discovery</li>
+                    </ul>
+                    <div style="display: flex; gap: 0.5rem; position: relative; z-index: 10;">
+                        <a href="#preview" class="btn btn-secondary" style="flex: 1; justify-content: center; font-size: 0.9rem; position: relative; z-index: 10;">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </a>
+                        <a href="#early-access" class="btn btn-primary" style="flex: 1; justify-content: center; font-size: 0.9rem; position: relative; z-index: 10;">
+                            <i class="fas fa-shopping-cart"></i>
+                            Get Book
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Book 2: Prayer Guidelines -->
+                <div class="book-card fade-in">
+                    <div class="book-number">02</div>
+                    <h3 class="book-title">Prayer Guidelines</h3>
+                    <div class="book-status status-complete">✅ Complete</div>
+                    
+                    <!-- Book Cover Image -->
+                    <div style="text-align: center; margin: 1.5rem 0; border: 2px dashed #d4af37; padding: 1rem; min-height: 400px;">
+                        <img src="https://raw.githubusercontent.com/clarence1212/images/main/prayer.png" 
+                             alt="Prayer Guidelines Book Cover" 
+                             style="width: 100%; max-width: 250px; height: 375px; object-fit: cover; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: all 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'"
+                             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.2)'"
+                             onload="console.log('Prayer cover loaded successfully')"
+                             onerror="console.log('Prayer cover failed to load'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; width: 100%; max-width: 250px; height: 375px; background: linear-gradient(135deg, #1a2b4c, #d4af37); border-radius: 10px; margin: 0 auto; flex-direction: column; align-items: center; justify-content: center; color: #fefefe; font-size: 1rem; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                            <div style="font-size: 1.5rem; margin-bottom: 1rem;">🙏</div>
+                            <div style="font-weight: bold; margin-bottom: 0.5rem;">Prayer Guidelines</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Cover Image</div>
+                            <div style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.6;">Breaking chains<br>through prayer</div>
+                        </div>
+                    </div>
+                    
+                    <p class="book-description">
+                        Biblical frameworks for breaking negative patterns and releasing 
+                        generational blessing through chapter-specific prayers.
+                    </p>
+                    <ul class="book-features">
+                        <li><i class="fas fa-pray"></i> Chapter-Specific Prayers</li>
+                        <li><i class="fas fa-shield-alt"></i> Breaking & Blessing Declarations</li>
+                        <li><i class="fas fa-book-open"></i> Biblical Foundations</li>
+                        <li><i class="fas fa-hands"></i> Circumstantial Prayer Guides</li>
+                    </ul>
+                    <div style="display: flex; gap: 0.5rem; position: relative; z-index: 10;">
+                        <a href="#preview" class="btn btn-secondary" style="flex: 1; justify-content: center; font-size: 0.9rem; position: relative; z-index: 10;">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </a>
+                        <a href="#early-access" class="btn btn-primary" style="flex: 1; justify-content: center; font-size: 0.9rem; position: relative; z-index: 10;">
+                            <i class="fas fa-shopping-cart"></i>
+                            Get Book
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Book 3: Daily Devotional -->
+                <div class="book-card fade-in">
+                    <div class="book-number">03</div>
+                    <h3 class="book-title">365-Day Devotional</h3>
+                    <div class="book-status status-complete">✅ Complete</div>
+                    
+                    <!-- Book Cover Image -->
+                    <div style="text-align: center; margin: 1.5rem 0; border: 2px dashed #d4af37; padding: 1rem; min-height: 400px;">
+                        <img src="https://raw.githubusercontent.com/clarence1212/images/main/daily.png" 
+                             alt="365-Day Devotional Book Cover" 
+                             style="width: 100%; max-width: 250px; height: 375px; object-fit: cover; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: all 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'"
+                             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.2)'"
+                             onload="console.log('Daily devotional cover loaded successfully')"
+                             onerror="console.log('Daily devotional cover failed to load'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; width: 100%; max-width: 250px; height: 375px; background: linear-gradient(135deg, #16a085, #f4e8c1); border-radius: 10px; margin: 0 auto; flex-direction: column; align-items: center; justify-content: center; color: #1a2b4c; font-size: 1rem; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                            <div style="font-size: 1.5rem; margin-bottom: 1rem;">📅</div>
+                            <div style="font-weight: bold; margin-bottom: 0.5rem;">365-Day Devotional</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Cover Image</div>
+                            <div style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.6;">Daily spiritual<br>nourishment</div>
+                        </div>
+                    </div>
+                    
+                    <p class="book-description">
+                        A full year of daily inspiration drawn from memoir themes, 
+                        designed to deepen your relationship with God.
+                    </p>
+                    <ul class="book-features">
+                        <li><i class="fas fa-calendar-alt"></i> 365 Daily Devotions</li>
+                        <li><i class="fas fa-seedling"></i> Weekly Spiritual Themes</li>
+                        <li><i class="fas fa-lightbulb"></i> Life Application Challenges</li>
+                        <li><i class="fas fa-quote-right"></i> Daily Declarations</li>
+                    </ul>
+                    <div style="display: flex; gap: 0.5rem; position: relative; z-index: 10;">
+                        <a href="#devotional" class="btn btn-secondary" style="flex: 1; justify-content: center; font-size: 0.9rem; position: relative; z-index: 10;">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </a>
+                        <a href="#early-access" class="btn btn-primary" style="flex: 1; justify-content: center; font-size: 0.9rem; position: relative; z-index: 10;">
+                            <i class="fas fa-shopping-cart"></i>
+                            Get Book
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Access Section -->
+    <section id="early-access" class="devotional-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Get Early Access</h2>
+            <p class="fade-in" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Be among the first to experience the complete "Blessing Upon Blessing" series
+            </p>
+            
+            <div class="devotional-preview fade-in" style="max-width: 600px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: center; margin-bottom: 2rem;">
+                    <!-- Book Covers in Early Access -->
+                    <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <img src="https://raw.githubusercontent.com/clarence1212/images/main/cover.png" 
+                             alt="Book 1: Memoir" 
+                             style="width: 30%; height: auto; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                        <img src="https://raw.githubusercontent.com/clarence1212/images/main/prayer.png" 
+                             alt="Book 2: Prayer Guidelines" 
+                             style="width: 30%; height: auto; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover; max-height: 120px;">
+                        <img src="https://raw.githubusercontent.com/clarence1212/images/main/daily.png" 
+                             alt="Book 3: Daily Devotional" 
+                             style="width: 30%; height: auto; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); object-fit: cover; max-height: 120px;">
+                    </div>
+                    
+                    <div>
+                        <i class="fas fa-gift" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--deep-blue); margin-bottom: 1rem;">Exclusive Early Access</h3>
+                        <p>Get immediate access to all three books before the official launch. Simply provide your email and we'll send you a special access code.</p>
+                    </div>
+                </div>
+                
+                <!-- Mailchimp Signup Form -->
+                <div id="mc_embed_signup">
+                    <form action="https://YOUR-USERNAME.us1.list-manage.com/subscribe/post?u=XXXXX&amp;id=XXXXX" 
+                          method="post" 
+                          id="mc-embedded-subscribe-form" 
+                          name="mc-embedded-subscribe-form" 
+                          class="validate" 
+                          target="_blank"
+                          style="margin-bottom: 2rem;">
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <input type="email" 
+                                   name="EMAIL" 
+                                   id="mce-EMAIL"
+                                   placeholder="Enter your email address" 
+                                   required
+                                   style="width: 100%; padding: 1rem; border: 2px solid var(--soft-gold); border-radius: 10px; font-size: 1.1rem;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <input type="text" 
+                                   name="FNAME" 
+                                   id="mce-FNAME"
+                                   placeholder="Your first name" 
+                                   required
+                                   style="width: 100%; padding: 1rem; border: 2px solid var(--soft-gold); border-radius: 10px; font-size: 1.1rem;">
+                        </div>
+                        
+                        <!-- real people should not fill this in and expect good things -->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_XXXXX_XXXXX" tabindex="-1" value="">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Me Early Access
+                        </button>
+                        
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--text-dark);">
+                            We respect your privacy. Unsubscribe at any time.
+                        </p>
+                    </form>
+                </div>
+                
+                <div style="background: var(--soft-gold); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">What You'll Get:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.5rem 0;"><i class="fas fa-check" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> Immediate access to complete memoir</li>
+                        <li style="margin: 0.5rem 0;"><i class="fas fa-check" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> Full prayer guidelines book</li>
+                        <li style="margin: 0.5rem 0;"><i class="fas fa-check" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> 365-day devotional access</li>
+                        <li style="margin: 0.5rem 0;"><i class="fas fa-check" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> Exclusive updates from Dr. Chen</li>
+                        <li style="margin: 0.5rem 0;"><i class="fas fa-check" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> Special launch pricing notification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Preview Section -->
+    <section id="preview" class="books-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Book Previews</h2>
+            <p class="fade-in" style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">
+                Get a taste of the transformative content in each book
+            </p>
+            
+            <!-- Memoir Preview -->
+            <div class="book-preview fade-in">
+                <h3 style="color: var(--deep-blue); text-align: center; margin-bottom: 2rem;">
+                    <i class="fas fa-book-open" style="margin-right: 0.5rem;"></i>
+                    Book 1: The Memoir - Chapter 1 Preview
+                </h3>
+                <div style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">Chapter 1: Born Between Altars</h4>
+                    <div style="border-left: 4px solid var(--primary-gold); padding-left: 1.5rem; margin: 1.5rem 0; font-style: italic; color: var(--text-dark);">
+                        "I was born into a house of gods—but not the God I would eventually serve. The youngest of eleven children in 1960s Singapore, I entered a world where ancestral altars competed with modern aspirations, where incense smoke mingled with the dreams of a rapidly changing nation..."
+                    </div>
+                    
+                    <div style="margin: 2rem 0; line-height: 1.8; color: var(--text-dark);">
+                        <p style="margin-bottom: 1rem;">My earliest memories are filled with the acrid smell of joss sticks and the sight of oranges arranged carefully before wooden idols. Every morning, I watched my mother light incense at the altar, her weathered hands moving in practiced motions passed down through generations. She would mutter prayers in Hokkien, asking for protection, prosperity, and favor from ancestors I had never met.</p>
+                        
+                        <p style="margin-bottom: 1rem;">Our shophouse on Pagoda Street stood as a testament to old Singapore—narrow, cramped, and filled with more people than rooms. As the eleventh child, I learned early that space, food, and attention were commodities to be shared, not owned. My siblings and I slept on thin mattresses spread across the floor, our dreams literally overlapping in the humid night air.</p>
+                        
+                        <p style="margin-bottom: 1rem;">But something stirred within me even then, a restlessness that the household gods could not quiet. While my brothers found comfort in the familiar rituals and my sisters prepared to continue the traditions, I found myself asking questions that had no answers in our ancestral worship...</p>
+                        
+                        <div style="text-align: center; padding: 1rem; background: var(--soft-gold); border-radius: 10px; margin: 2rem 0;">
+                            <p style="font-style: italic; margin: 0;">The chapter continues with young Elias's first encounter with Christianity through a neighbor, setting the stage for a lifetime journey from chronos to kairos...</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button onclick="openModal('memoir')" class="btn btn-secondary" style="margin-right: 1rem;">
+                            <i class="fas fa-book-reader"></i>
+                            Read Sample Chapter
+                        </button>
+                        <a href="#early-access" class="btn btn-primary">
+                            <i class="fas fa-book"></i>
+                            Read Complete Chapter
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prayer Guidelines Preview -->
+            <div class="book-preview fade-in" style="margin-top: 3rem;">
+                <h3 style="color: var(--deep-blue); text-align: center; margin-bottom: 2rem;">
+                    <i class="fas fa-praying-hands" style="margin-right: 0.5rem;"></i>
+                    Book 2: Prayer Guidelines - Breaking Generational Patterns
+                </h3>
+                <div style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">Chapter 3: Breaking the Stronghold of Ancestral Worship</h4>
+                    
+                    <div style="margin: 2rem 0;">
+                        <div style="background: var(--soft-gold); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h5 style="color: var(--deep-blue); margin-bottom: 0.5rem;">Biblical Foundation:</h5>
+                            <p style="margin: 0;"><strong>Exodus 20:3-5</strong> - "You shall have no other gods before me. You shall not make for yourself an image in the form of anything in heaven above or on the earth beneath..."</p>
+                            <p style="margin: 0.5rem 0 0 0;"><strong>Galatians 3:13-14</strong> - "Christ redeemed us from the curse of the law by becoming a curse for us... so that in Christ Jesus the blessing of Abraham might come to the Gentiles."</p>
+                        </div>
+                        
+                        <div style="background: var(--deep-blue); color: var(--warm-white); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h5 style="color: var(--primary-gold); margin-bottom: 1rem;">Breaking Prayer:</h5>
+                            <p style="line-height: 1.8;">Heavenly Father, in the mighty name of Jesus, I come before Your throne of grace. I acknowledge that my family line has served other gods and engaged in ancestral worship. Today, I choose to break these chains that have bound my family for generations.</p>
+                            <p style="line-height: 1.8; margin-top: 1rem;">I renounce all covenants, dedications, and agreements made with ancestral spirits, household gods, and territorial deities. I declare that Jesus Christ is my only Lord and Savior. I break every soul tie connecting me to false altars and idolatrous practices...</p>
+                        </div>
+                        
+                        <div style="background: #f0f8f5; padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-teal);">
+                            <h5 style="color: var(--deep-blue); margin-bottom: 1rem;">Blessing Declaration:</h5>
+                            <p style="line-height: 1.8;">I declare that my household is now under the Lordship of Jesus Christ. Where there was spiritual bondage, I now walk in freedom. Where there was generational curse, I now inherit generational blessing. My children and children's children shall know the Lord and serve Him only...</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 1rem; background: var(--soft-gold); border-radius: 10px; margin: 2rem 0;">
+                            <p style="font-style: italic; margin: 0;">This chapter includes specific prayers for different aspects of ancestral worship, practical steps for removing altars, and testimonies of breakthrough...</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button onclick="openModal('prayer')" class="btn btn-secondary" style="margin-right: 1rem;">
+                            <i class="fas fa-praying-hands"></i>
+                            Read Prayer Sample
+                        </button>
+                        <a href="#early-access" class="btn btn-primary">
+                            <i class="fas fa-pray"></i>
+                            Access Complete Prayer Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Devotional Preview -->
+            <div class="book-preview fade-in" style="margin-top: 3rem;">
+                <h3 style="color: var(--deep-blue); text-align: center; margin-bottom: 2rem;">
+                    <i class="fas fa-calendar-alt" style="margin-right: 0.5rem;"></i>
+                    Book 3: 365-Day Devotional - Week 1, Day 1
+                </h3>
+                <div style="background: white; border-radius: 15px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: var(--deep-blue); color: var(--primary-gold); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem;">1</div>
+                        <div>
+                            <h4 style="color: var(--deep-blue); margin: 0;">Before You Were Born</h4>
+                            <p style="color: var(--text-dark); margin: 0; font-style: italic;">Theme: Trust in Divine Timing</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--soft-gold); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <h5 style="color: var(--deep-blue); margin-bottom: 0.5rem;">Today's Scripture:</h5>
+                        <p style="font-style: italic; margin: 0;">"Before I formed you in the womb I knew you, before you were born I set you apart; I appointed you as a prophet to the nations." - Jeremiah 1:5 (NIV)</p>
+                    </div>
+                    
+                    <div style="line-height: 1.8; color: var(--text-dark);">
+                        <h5 style="color: var(--deep-blue); margin-bottom: 0.5rem;">Memoir Reflection:</h5>
+                        <p style="margin-bottom: 1rem;">Born as the youngest of eleven children in 1960s Singapore, surrounded by ancestral altars and incense smoke, I had no idea that God was already writing my name in His book. While my parents dedicated me to household gods, the God of Heaven had already set me apart for His purposes. What seemed like an inauspicious beginning—poverty, idol worship, and family dysfunction—was actually God's perfect setup for a testimony of transformation.</p>
+                        
+                        <h5 style="color: var(--deep-blue); margin-bottom: 0.5rem;">Deeper Dive:</h5>
+                        <p style="margin-bottom: 1rem;">God's timing operates in the realm of kairos, not chronos. While we count days and years, He orchestrates destinies. Your birth circumstances—whether celebrated or challenging—do not catch God by surprise. Like Moses in a basket or Jesus in a manger, God often places His chosen vessels in unlikely beginnings to display His glory more magnificently...</p>
+                        
+                        <h5 style="color: var(--deep-blue); margin-bottom: 0.5rem;">Life Application:</h5>
+                        <p style="margin-bottom: 1rem;">Today, examine your own beginning. What circumstances of your birth or early life have you considered disadvantages? List three specific situations that seemed negative. Now, ask the Holy Spirit to reveal how God might use these very circumstances as preparation for your calling...</p>
+                    </div>
+                    
+                    <div style="background: var(--deep-blue); color: var(--primary-gold); padding: 1.5rem; border-radius: 10px; margin: 2rem 0;">
+                        <h5 style="margin-bottom: 0.5rem;">Today's Declaration:</h5>
+                        <p style="margin: 0; font-weight: bold;">"I am not an accident. God formed me with intention and set me apart for His purposes. My beginning is His starting point for blessing upon blessing."</p>
+                    </div>
+                    
+                    <div style="background: #f0f8f5; padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-teal);">
+                        <h5 style="color: var(--deep-blue); margin-bottom: 0.5rem;">Prayer Focus:</h5>
+                        <p style="margin: 0;">Father, thank You for knowing me before I was formed. I surrender my past, present, and future to Your perfect timing. Transform every disadvantage in my story into a display of Your glory. In Jesus' name, Amen.</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--soft-gold); border-radius: 10px; margin: 2rem 0;">
+                        <p style="font-style: italic; margin: 0;">Continue your journey through all 365 days of transformation, with weekly themes, practical challenges, and daily encounters with God's kairos moments...</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button onclick="openModal('devotional')" class="btn btn-secondary" style="margin-right: 1rem;">
+                            <i class="fas fa-calendar-check"></i>
+                            Read Week 1 Sample
+                        </button>
+                        <a href="#early-access" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus"></i>
+                            Get Complete 365-Day Journey
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section id="author" class="author-section">
+        <div class="container">
+            <div class="author-content fade-in">
+                <div class="author-image">
+                    <img src="https://raw.githubusercontent.com/clarence1212/images/main/eckme.png" 
+                         alt="Dr. Elias Kairos Chen" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-tie\' style=\'font-size: 4rem;\'></i>';">
+                </div>
+                <div class="author-text">
+                    <h3>Dr. Elias Kairos Chen</h3>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--primary-gold);">
+                        Author & Prophetic Voice
+                    </p>
+                    <p>
+                        From ancestral altars in Singapore to divine revelations across continents, 
+                        Dr. Chen's journey exemplifies the transformative power of surrendering to God's timing. 
+                        His testimony of academic restoration, marriage redemption, and prophetic calling 
+                        offers hope to anyone facing impossible circumstances.
+                    </p>
+                    <p style="margin-top: 1.5rem;">
+                        Through personal loss, supernatural encounters, and the discovery of his 
+                        divine identity as "Elias Kairos," he demonstrates how God transforms 
+                        ordinary lives into extraordinary testimonies of blessing upon blessing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Start Your Journey</h2>
+            <p class="fade-in" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                Choose your path to experiencing blessing upon blessing
+            </p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <h3>Free Early Access</h3>
+                    <div class="price">$0<span>/limited time</span></div>
+                    <p style="color: var(--accent-teal); font-weight: bold; margin-bottom: 1rem;">🎁 Special Launch Offer</p>
+                    <ul class="book-features" style="text-align: left;">
+                        <li><i class="fas fa-check"></i> Complete memoir access</li>
+                        <li><i class="fas fa-check"></i> Full prayer guidelines</li>
+                        <li><i class="fas fa-check"></i> 365-day devotional</li>
+                        <li><i class="fas fa-check"></i> Email-only access code</li>
+                        <li><i class="fas fa-check"></i> Launch pricing notifications</li>
+                    </ul>
+                    <a href="#early-access" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        Get Free Access
+                    </a>
+                </div>
+
+                <div class="pricing-card featured fade-in">
+                    <h3>Complete Series</h3>
+                    <div class="price">$49<span>/series</span></div>
+                    <p style="color: var(--accent-teal); font-weight: bold; margin-bottom: 1rem;">🎯 Best Value - Save $8</p>
+                    <ul class="book-features" style="text-align: left;">
+                        <li><i class="fas fa-check"></i> All 3 books included</li>
+                        <li><i class="fas fa-check"></i> Early access to new releases</li>
+                        <li><i class="fas fa-check"></i> Bonus prayer resources</li>
+                        <li><i class="fas fa-check"></i> Email support from author</li>
+                        <li><i class="fas fa-check"></i> Exclusive updates & content</li>
+                    </ul>
+                    <a href="#early-access" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        Get Complete Series
+                    </a>
+                </div>
+
+                <div class="pricing-card fade-in">
+                    <h3>Premium Access</h3>
+                    <div class="price">$97<span>/year</span></div>
+                    <ul class="book-features" style="text-align: left;">
+                        <li><i class="fas fa-check"></i> Everything in Complete Series</li>
+                        <li><i class="fas fa-check"></i> Monthly live Q&A sessions</li>
+                        <li><i class="fas fa-check"></i> Personalized prayer guidance</li>
+                        <li><i class="fas fa-check"></i> Private community access</li>
+                        <li><i class="fas fa-check"></i> First access to new content</li>
+                    </ul>
+                    <a href="#early-access" class="btn btn-secondary" style="width: 100%; justify-content: center;">
+                        Join Premium
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: var(--text-dark); font-style: italic;">
+                    ✨ 30-day money-back guarantee • 📱 Available on all devices • 🔒 Secure payment processing
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#books">Books</a>
+                <a href="#preview">Preview</a>
+                <a href="#early-access">Early Access</a>
+                <a href="#author">Author</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <p>&copy; 2025 Blessing Upon Blessing. All rights reserved.</p>
+            <p style="margin-top: 1rem; color: var(--primary-gold);">
+                "May blessing upon blessing continue without end."
+            </p>
+        </div>
+    </footer>
+
+    <!-- Reading Modal -->
+    <div id="readingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modalTitle">Sample Chapter</h2>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <p>Enjoying this sample? Get immediate access to the complete book!</p>
+                <a href="#early-access" class="btn btn-primary" onclick="closeModal()">
+                    <i class="fas fa-gift"></i>
+                    Get Early Access
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(bookType) {
+            const modal = document.getElementById('readingModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Set title based on book type
+            let title = '';
+            let filename = '';
+            
+            switch(bookType) {
+                case 'memoir':
+                    title = 'Book 1: The Memoir - Chapter 1 Sample';
+                    filename = 'memoir-chapter1.md';
+                    break;
+                case 'prayer':
+                    title = 'Book 2: Prayer Guidelines - Sample Prayers';
+                    filename = 'prayer-sample.md';
+                    break;
+                case 'devotional':
+                    title = 'Book 3: 365-Day Devotional - Week 1 Sample';
+                    filename = 'devotional-week1.md';
+                    break;
+            }
+            
+            modalTitle.textContent = title;
+            modalBody.innerHTML = '<p style="text-align: center;">Loading content...</p>';
+            
+            // Fetch the markdown content from GitHub
+            const url = `https://raw.githubusercontent.com/clarence1212/images/main/${filename}`;
+            
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Content not found');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    // Basic markdown to HTML conversion
+                    let html = markdown
+                        // Headers
+                        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                        // Bold
+                        .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                        // Italic
+                        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                        // Line breaks
+                        .replace(/\n\n/g, '</p><p>')
+                        // Wrap in paragraphs
+                        .replace(/^(.+)$/gm, function(match) {
+                            if (match.match(/^<h[1-3]>/)) return match;
+                            if (match.trim() === '') return '';
+                            return '<p>' + match + '</p>';
+                        });
+                    
+                    modalBody.innerHTML = html;
+                })
+                .catch(error => {
+                    modalBody.innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <p style="color: var(--deep-blue); font-size: 1.2rem;">Sample content is being prepared.</p>
+                            <p>Please check back soon or click below for early access to the complete book!</p>
+                            <br>
+                            <a href="#early-access" class="btn btn-primary" onclick="closeModal()">
+                                <i class="fas fa-gift"></i>
+                                Get Early Access
+                            </a>
+                        </div>
+                    `;
+                });
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('readingModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('readingModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (navbar && window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else if (navbar) {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in animation on scroll
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.fade-in');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('visible');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Initial check for elements already in view
+        revealOnScroll();
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', function() {
+                alert('Mobile menu would appear here in full implementation');
+            });
+        }
+
+        // Add click handlers for pricing buttons
+        document.querySelectorAll('.pricing-card .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const cardTitle = this.closest('.pricing-card').querySelector('h3').textContent;
+                if (cardTitle === 'Free Early Access') {
+                    // Scroll to early access form
+                    const earlyAccess = document.querySelector('#early-access');
+                    if (earlyAccess) {
+                        earlyAccess.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                } else {
+                    alert(`Payment integration would redirect to checkout for: ${cardTitle}`);
+                }
+            });
+        });
+
+        // Early Access Form Handler - Fixed with null check
+        const earlyAccessForm = document.getElementById('early-access-form');
+        if (earlyAccessForm) {
+            earlyAccessForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const name = document.getElementById('name').value;
+                
+                // Generate a mock access code (in real implementation, this would be sent via email)
+                const accessCode = 'BB-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                
+                // Show success message
+                alert(`Thank you, ${name}! Your early access code is: ${accessCode}\n\nIn a real implementation, this would be sent to ${email} along with download links.`);
+                
+                // Reset form
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
