@@ -166,13 +166,13 @@ footer .row{display:flex;flex-wrap:wrap;gap:8px 20px}
 @media (max-width:760px){.sun,.rays{left:50%;top:190px}.sun{width:520px}.rays{width:900px}}
 
 /* Reader */
-.sample{display:inline-block;margin-top:12px;font-weight:700;color:var(--link)}
+.sample{display:inline-block;margin-top:12px;font-weight:700;color:var(--link)}.samples{display:flex;flex-wrap:wrap;gap:0 18px}
 body.reading{overflow:hidden}
 #reader{width:min(760px,100%);max-width:100%;height:min(92dvh,100%);max-height:100%;margin:auto;padding:0;border:0;border-radius:8px;background:var(--paper);color:var(--ink);box-shadow:0 24px 70px rgba(0,0,0,.5);overflow:hidden}
 #reader[open]{display:grid;grid-template-rows:auto auto minmax(0,1fr)}
 #reader::backdrop{background:rgba(6,16,30,.72)}
-.rhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;background:var(--night);padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
-.rtabs{display:flex;gap:4px;min-width:0}
+.rhead{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--night);padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.rtabs{display:flex;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none}.rtabs::-webkit-scrollbar{display:none}.rtabs button{flex:none}#rclose{flex:none}
 .rtabs button{font:400 1rem var(--body);padding:9px 12px;background:transparent;color:var(--on-dark);border:0;border-radius:4px;cursor:pointer}
 .rtabs button[aria-selected="true"]{background:var(--ember);color:var(--night);font-weight:700}
 #rclose{font:700 1rem var(--body);padding:9px 12px;background:transparent;color:var(--ember);border:1px solid rgba(233,184,114,.55);border-radius:4px;cursor:pointer}
@@ -186,7 +186,7 @@ body.reading{overflow:hidden}
 .rtext .verse{font-style:italic;color:var(--muted);margin-bottom:.6em}.rtext .meta{color:var(--muted);font-size:1rem;margin-bottom:1.8em}
 .rend{margin-top:2.4em;padding:clamp(20px,4vw,30px);background:var(--night);color:var(--on-dark);border-radius:6px}
 .rend h2{margin:0 0 8px;color:var(--ember)}.rend p{margin:0 0 16px}
-@media (max-width:760px){#reader{width:100%;height:100%;border-radius:0}.rtabs button{padding:9px 8px;font-size:.95rem}}
+@media (max-width:760px){#reader{width:100%;height:100%;border-radius:0}.rtabs button{padding:9px 6px;font-size:.92rem}}
 @media (prefers-reduced-motion:reduce){.sun,.rays,.mist,.hero .art img{animation:none}}
 </style>
 <script id="mcjs" async src="https://chimpstatic.com/mcjs-connected/js/users/bbcb08370012c49ad4f53dbcf/7783c35ce839d5eebf30755be.js"></script>
@@ -237,7 +237,7 @@ body.reading{overflow:hidden}
       <p class="first">The acrid sweetness of burning incense filled our living room every morning, carrying whispered prayers to ancestors who watched over us from their mahogany tablets. As Singapore's youngest of eleven children in the mid-1960s, I learned to navigate between worlds before I could fully understand what either one meant—the ancient traditions of my Chinese immigrant family and the rapidly modernizing nation taking shape around us.</p>
       <p>My third sister, closest to me in age and affection, would sometimes tell me stories about our father that seemed too strange to believe. “Ah Pa was baptized in the sea,” she would say matter-of-factly, as if discussing what we had eaten for dinner. “Before you were born, when he first came from Fujian.”</p>
     </div>
-    <div class="more-row"><a class="more" href="chapter-1.html" data-read="memoir">Keep reading Chapter 1</a><span>About 15 minutes</span></div>
+    <div class="more-row"><a class="more" href="chapter-1.html" data-read="memoir">Keep reading Chapter 1</a><span>About 15 minutes</span><a class="more" href="foreword.html" data-read="foreword">Read the Foreword</a></div>
   </div>
 </section>
 
@@ -294,7 +294,7 @@ body.reading{overflow:hidden}
           <p class="kind">The memoir</p>
           <h3>Blessing Upon Blessing</h3>
           <p>An autobiography of faith, loss, and divine transformation, in thirteen chapters from a shophouse altar in Singapore to a mountain blessing in the Philippines.</p>
-          <a class="sample" href="chapter-1.html" data-read="memoir">Read Chapter 1</a>
+          <span class="samples"><a class="sample" href="foreword.html" data-read="foreword">Read the Foreword</a><a class="sample" href="chapter-1.html" data-read="memoir">Read Chapter 1</a></span>
           <div class="buy" data-buy="memoir"></div>
         </div>
       </article>
@@ -368,7 +368,8 @@ body.reading{overflow:hidden}
 <dialog id="reader" aria-label="Read a sample">
   <div class="rhead">
     <div class="rtabs" role="tablist" aria-label="Choose a book">
-      <button type="button" role="tab" data-tab="memoir">Memoir</button>
+      <button type="button" role="tab" data-tab="foreword">Foreword</button>
+      <button type="button" role="tab" data-tab="memoir">Chapter 1</button>
       <button type="button" role="tab" data-tab="prayer">Prayer</button>
       <button type="button" role="tab" data-tab="devotional">Devotional</button>
     </div>
@@ -407,7 +408,7 @@ window.addEventListener('pageshow',function(){
 /* Reader: opens samples on this page. If it can't load one, the link opens the sample's own page. */
 (function(){
   var d=document.getElementById('reader');if(!d||!d.showModal)return;
-  var PAGES={memoir:'chapter-1.html',prayer:'prayer-sample.html',devotional:'devotional-sample.html'};
+  var PAGES={foreword:'foreword.html',memoir:'chapter-1.html',prayer:'prayer-sample.html',devotional:'devotional-sample.html'};
   var body=document.getElementById('rbody'),text=document.getElementById('rtext'),bar=document.getElementById('rprog');
   var tabs=[].slice.call(d.querySelectorAll('[data-tab]')),cache={},current=null,pushed=false;
   function prog(){var m=body.scrollHeight-body.clientHeight;bar.style.transform='scaleX('+(m>0?Math.min(1,body.scrollTop/m):0)+')';}
