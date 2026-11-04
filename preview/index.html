@@ -286,14 +286,14 @@ footer .row{display:flex;flex-wrap:wrap;gap:8px 20px}
   <div class="wrap">
     <div>
       <h2>Get all three books by email</h2>
-      <p style="margin-top:14px">Enter your email and we'll send you a confirmation link. Click it, and we'll then send your password and download link for the PDF editions, free of charge.</p>
+      <p style="margin-top:14px">Enter your email and we'll send you the password and download link for the PDF editions, free of charge.</p>
       <ul>
         <li>The complete memoir</li>
         <li>Prayer Guidelines</li>
         <li>The 365-day Daily Devotional</li>
       </ul>
     </div>
-    <form id="signup" action="https://glbgroup-asia.us4.list-manage.com/subscribe/post?u=bbcb08370012c49ad4f53dbcf&amp;id=f672b3992c&amp;f_id=0007cfe7f0" method="post">
+    <form id="signup" method="post">
       <label for="email">Email address<input id="email" type="email" name="EMAIL" autocomplete="email" required></label>
       <label for="fname">First name <input id="fname" type="text" name="FNAME" autocomplete="given-name"></label>
       <input type="hidden" name="tags" value="6529489">
@@ -339,7 +339,8 @@ document.querySelectorAll('[data-buy]').forEach(function(box){
   });
 });
 
-document.getElementById('signup').addEventListener('submit',function(){
+document.getElementById('signup').addEventListener('submit',function(e){
+  if(this.querySelector('.hp input').value){e.preventDefault();return;}this.action=['https://glbgroup-asia.us4','list-manage.com/subscribe/post?u=bbcb08370012c49ad4f53dbcf&id=f672b3992c&f_id=0007cfe7f0'].join('.');
   var b=document.getElementById('go');b.textContent='Opening the next step…';b.disabled=true;
 });
 window.addEventListener('pageshow',function(){
