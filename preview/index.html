@@ -271,21 +271,20 @@ footer .row{display:flex;flex-wrap:wrap;gap:8px 20px}
   <div class="wrap">
     <div>
       <h2>Get all three books by email</h2>
-      <p style="margin-top:14px">Enter your email and we'll send you the download links for the PDF editions, free of charge.</p>
+      <p style="margin-top:14px">Enter your email, then complete a quick “I'm not a robot” check on the next page. We'll email you the password and download link for the PDF editions, free of charge.</p>
       <ul>
         <li>The complete memoir</li>
         <li>Prayer Guidelines</li>
         <li>The 365-day Daily Devotional</li>
       </ul>
     </div>
-    <form id="signup" novalidate>
+    <form id="signup" action="https://glbgroup-asia.us4.list-manage.com/subscribe/post?u=bbcb08370012c49ad4f53dbcf&amp;id=f672b3992c&amp;f_id=0007cfe7f0" method="post">
       <label for="email">Email address<input id="email" type="email" name="EMAIL" autocomplete="email" required></label>
       <label for="fname">First name <input id="fname" type="text" name="FNAME" autocomplete="given-name"></label>
+      <input type="hidden" name="tags" value="6529489">
       <div class="hp" aria-hidden="true"><input type="text" id="hp" name="b_bbcb08370012c49ad4f53dbcf_f672b3992c" tabindex="-1" autocomplete="off"></div>
       <button class="btn" id="go" type="submit">Send me the books</button>
-      <div class="status" id="status" role="status" hidden></div>
       <p class="fine">You'll also receive occasional updates from Elias. You can unsubscribe at any time. See the <a href="privacy.html">privacy policy</a>.</p>
-      <noscript><p class="status bad">This form needs JavaScript. To request the books, write to contact@eliaskairos-chen.com.</p></noscript>
     </form>
   </div>
 </section>
@@ -326,33 +325,12 @@ document.querySelectorAll('[data-buy]').forEach(function(box){
   });
 });
 
-/* Mailchimp signup. Uses the JSONP endpoint so readers see the real result. */
-(function(){
-  var MC='https://glbgroup-asia.us4.list-manage.com/subscribe/post-json?u=bbcb08370012c49ad4f53dbcf&id=f672b3992c&f_id=0007cfe7f0';
-  var TAG='6529489';
-  var form=document.getElementById('signup'),btn=document.getElementById('go'),st=document.getElementById('status');
-  function show(msg,bad){st.textContent=msg;st.className='status'+(bad?' bad':'');st.hidden=false;btn.disabled=false;btn.textContent='Send me the books';}
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var email=form.EMAIL.value.trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){show('Please enter a complete email address, such as name@example.com.',true);form.EMAIL.focus();return;}
-    if(document.getElementById('hp').value)return;
-    btn.disabled=true;btn.textContent='Sending…';st.hidden=true;
-    var cb='mc'+Date.now(),s=document.createElement('script'),done=false;
-    function end(){done=true;delete window[cb];s.remove();}
-    function failed(){if(done)return;end();show('We could not reach the sign-up service. Please try again in a moment, or write to contact@eliaskairos-chen.com.',true);}
-    window[cb]=function(r){
-      end();
-      if(r&&r.result==='success'){form.reset();show('Thank you. Please check your inbox, and your spam folder, for an email from us.',false);return;}
-      var m=String(r&&r.msg||'').replace(/<[^>]*>/g,'');
-      if(/already subscribed/i.test(m))show('This email is already on our list. Please look for our earlier email, or write to contact@eliaskairos-chen.com for the links.',true);
-      else show(m.replace(/^\d+ - /,'')||'Something went wrong. Please try again.',true);
-    };
-    s.onerror=failed;setTimeout(failed,12000);
-    s.src=MC+'&c='+cb+'&EMAIL='+encodeURIComponent(email)+'&FNAME='+encodeURIComponent(form.FNAME.value.trim())+'&tags='+TAG;
-    document.body.appendChild(s);
-  });
-})();
+document.getElementById('signup').addEventListener('submit',function(){
+  var b=document.getElementById('go');b.textContent='Opening the next step…';b.disabled=true;
+});
+window.addEventListener('pageshow',function(){
+  var b=document.getElementById('go');b.textContent='Send me the books';b.disabled=false;
+});
 </script>
 
 </body></html>
