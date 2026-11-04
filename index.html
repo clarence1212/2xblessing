@@ -62,11 +62,17 @@ nav .links a:hover{color:var(--ember)}
 .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .hero img{display:block;width:100%;max-width:330px;height:auto;margin-inline:auto;box-shadow:0 26px 60px rgba(0,0,0,.5)}
 
-.for{background:linear-gradient(180deg,#3f5a70 0%,#5f7487 100%);color:#fff}
-.for h2{color:#fff}
-.for ul{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:18px;font-size:clamp(1.2rem,2.6vw,1.5rem);line-height:1.45}
-.for li{color:#fff}
-.for .src{margin-top:26px;font-size:1rem;color:#f1f4f6}
+.for{background:linear-gradient(180deg,#3f5a70 0%,#22384f 34%,var(--night) 100%);color:var(--on-dark)}
+.forgrid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:start}
+.forhead{position:sticky;top:96px}
+.for h2{color:#fff;font-size:clamp(2.1rem,4.6vw,3.2rem)}
+.for .src{margin-top:18px;font-size:1rem;color:var(--on-dark-soft)}
+.formore{display:inline-block;margin-top:14px;color:var(--ember);font-weight:700}
+.for ul{list-style:none;margin:0;padding:0;font-size:clamp(1.2rem,2.2vw,1.45rem);line-height:1.5}
+.for li{padding-block:clamp(20px,3vw,28px);border-top:1px solid rgba(233,184,114,.35);color:var(--on-dark)}
+.for li:last-child{border-bottom:1px solid rgba(233,184,114,.35)}
+.for li em{font-style:normal;color:var(--ember)}
+@media (max-width:760px){.forgrid{grid-template-columns:minmax(0,1fr)}.forhead{position:static}}
 
 .excerpt{background:var(--paper)}
 .excerpt .label{color:var(--link)}
@@ -217,15 +223,18 @@ body.reading{overflow:hidden}
 </div>
 
 <section class="for">
-  <div class="wrap narrow">
-    <h2>Who this book was written for</h2>
+  <div class="wrap forgrid">
+    <div class="forhead">
+      <h2>Who this book was written for</h2>
+      <p class="src">In his own words, from the Foreword</p>
+      <a class="formore" href="foreword.html" data-read="foreword">Read the Foreword</a>
+    </div>
     <ul>
-      <li>“For those who have experienced profound loss and wondered if God still hears their prayers.”</li>
-      <li>“For those whose children don't fit conventional molds and who are learning to see neurological differences as divine design.”</li>
-      <li>“For those who have lived through seasons of wilderness and wondered if spring will ever come.”</li>
-      <li>“For those who carry names they don't fully understand but sense hold deeper meaning.”</li>
+      <li>For those who have experienced <em>profound loss</em> and wondered if God still hears their prayers.</li>
+      <li>For those whose children don&#39;t fit conventional molds and who are learning to see <em>neurological differences as divine design</em>.</li>
+      <li>For those who have lived through <em>seasons of wilderness</em> and wondered if spring will ever come.</li>
+      <li>For those who carry <em>names they don&#39;t fully understand</em> but sense hold deeper meaning.</li>
     </ul>
-    <p class="src">From the Foreword</p>
   </div>
 </section>
 
